@@ -29,10 +29,12 @@ public class PuzzleGame extends JFrame{
     private JPanel puzzlePanel = new JPanel(new GridLayout(4, 4));
 
     public PuzzleGame() {
-        initialize();
+        int shuff = JOptionPane.showConfirmDialog(rootPane, "Desea mezclar la imagen?", "Mezclar?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        Boolean shuffle = shuff == JOptionPane.YES_OPTION ? true : false;
+        initialize(shuffle);
     }
 
-    private void initialize() {
+    private void initialize(Boolean shuffle) {
         setTitle("Puzzle Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
@@ -81,8 +83,9 @@ public class PuzzleGame extends JFrame{
         
         // Almacenar las posiciones iniciales
         originalOrder.addAll(buttons);
-
-        shufflePuzzle();
+        if (shuffle){
+            shufflePuzzle();
+        }
         pack();
         setLocationRelativeTo(null); // Center the window
     }
