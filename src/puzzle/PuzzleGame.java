@@ -4,7 +4,6 @@
  */
 package puzzle;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -13,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import javax.swing.*;
 
 /**
  *
@@ -35,7 +35,7 @@ public class PuzzleGame extends JFrame{
             return;
         }
         int shuff = JOptionPane.showConfirmDialog(rootPane, "Desea mezclar la imagen?", "Mezclar?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        Boolean shuffle = shuff == JOptionPane.YES_OPTION ? true : false;
+        Boolean shuffle = shuff == JOptionPane.YES_OPTION;
         initialize(shuffle);
     }
 
@@ -46,12 +46,13 @@ public class PuzzleGame extends JFrame{
         final String fileName = "catCry.jpg";
 
         try {
-            imageChunks = separar_imagen.splitImage(new File(fileName));
+            imageChunks = separar_imagen.splitAndProcessImage(new File(fileName));
         } catch (IOException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error cargando la imágen. \nPor favor asegúrate que el archivo de imágen '" + fileName + "' existe.", "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(1);
         }
+
 
         buttons = new ArrayList<>();
 

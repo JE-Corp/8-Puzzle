@@ -4,19 +4,33 @@
  */
 package puzzle;
 import java.awt.Graphics2D;
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
 /**
  *
  * @author luckyazumi
  */
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+
 public class separar_imagen {
-    public static BufferedImage[] splitImage(File file) throws IOException {
+    
+    public static BufferedImage[] splitAndProcessImage(File file) throws IOException {
         BufferedImage sourceImage = ImageIO.read(file);
+
+        ImageProcessor imageProcessor = new ImageProcessor();
+        BufferedImage[] chunks = splitImage(sourceImage);
+
+        
+        for (BufferedImage chunk : chunks) {
+            imageProcessor.processImage(chunk);
+        }
+        
+        return chunks;
+    }
+
+    public static BufferedImage[] splitImage(BufferedImage sourceImage) throws IOException {
         int rows = 4;
         int cols = 4;
         int chunks = rows * cols;
@@ -41,16 +55,5 @@ public class separar_imagen {
             }
         }
         return imageArray;
-    }
-
-    public static void main(String[] args) {
-        try {
-            BufferedImage[] chunks = splitImage(new File("catCry.jpg"));
-
-            // At this point, the image is split into 16 chunks stored in the array chunks[]
-            // You can now use these chunks to display the puzzle pieces or perform other operations.
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }
