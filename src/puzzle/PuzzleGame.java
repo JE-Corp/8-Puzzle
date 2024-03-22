@@ -29,6 +29,11 @@ public class PuzzleGame extends JFrame{
     private JPanel puzzlePanel = new JPanel(new GridLayout(4, 4));
 
     public PuzzleGame() {
+        Boolean dev = false;
+        if (!dev){
+            initialize(!dev);
+            return;
+        }
         int shuff = JOptionPane.showConfirmDialog(rootPane, "Desea mezclar la imagen?", "Mezclar?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         Boolean shuffle = shuff == JOptionPane.YES_OPTION ? true : false;
         initialize(shuffle);
