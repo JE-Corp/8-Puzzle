@@ -1,3 +1,6 @@
+### Update
+Abandoned project, open-sourced now. Pls tag us if you use this:D
+
 # Puzzle
  15-Piece puzzle en Java
 
